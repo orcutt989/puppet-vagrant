@@ -1,5 +1,7 @@
 */puppet-enterprise-2019.1.0-rc9-el-7-x86_64
 */.vagrant
+*/puppet-*
+*/*.tar.*
 
 # General
 .DS_Store
