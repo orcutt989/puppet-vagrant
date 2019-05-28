@@ -46,3 +46,4 @@ echo "******************************************"
 curl -o pe-${PE_RELEASES[$INDEX]}.tar.gz "http://enterprise.delivery.puppetlabs.net/archives/releases/${PE_RELEASES[$INDEX]}/puppet-enterprise-${PE_RELEASES[$INDEX]}-el-7-x86_64.tar.gz"
 tar -xzf pe-${PE_RELEASES[$INDEX]}.tar.gz
 
+vagrant up
