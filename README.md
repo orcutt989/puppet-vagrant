@@ -75,7 +75,8 @@ Starts up a Centos 7 box with a fully functioning and reachable Puppet Enterpris
 [41]: 2016.4.2
 [42]: 2016.4.1
 [43]: 2016.4.0
-What version of Puppet Enterprise would you like? [2019.1.0]:```
+What version of Puppet Enterprise would you like? [2019.1.0]:
+```
 
 3. `vagrant ssh`
 
