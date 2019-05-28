@@ -38,5 +38,11 @@ while true; do
 done
 
 # Based on variable or text input curl to release
-# i.e. http://enterprise.delivery.puppetlabs.net/archives/releases/2019.1.0/puppet-enterprise-2019.1.0-el-7-x86_64.tar
+# i.e. http://enterprise.delivery.puppetlabs.net/archives/releases/2016.4.0/puppet-enterprise-2016.4.0-el-7-x86_64.tar.gz
+echo "******************************************"
+echo "* Downloading Puppet Enterprise ${PE_RELEASES[$INDEX]} *"
+echo "******************************************"
+
+curl -o pe-${PE_RELEASES[$INDEX]}.tar.gz "http://enterprise.delivery.puppetlabs.net/archives/releases/${PE_RELEASES[$INDEX]}/puppet-enterprise-${PE_RELEASES[$INDEX]}-el-7-x86_64.tar.gz"
+tar -xzf pe-${PE_RELEASES[$INDEX]}.tar.gz
 
