@@ -66,6 +66,5 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     sudo find /vagrant -name "puppet-enterprise-installer" -exec {} \;
-
   SHELL
 end
