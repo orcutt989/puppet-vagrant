@@ -13,21 +13,28 @@ PE_RELEASES=($(curl -s http://enterprise.delivery.puppetlabs.net/archives/releas
 # Latest version
 LATEST=${PE_RELEASES[0]}
 
+# List releases
+NUM=1
+for RELEASE in "${PE_RELEASES[@]}"
+do
+    echo -e "[$NUM]: $RELEASE" 
+    ((NUM++))
+done
+
 # Ask user what version they want
 while true; do
-    NUM=1
-    for RELEASE in "${PE_RELEASES[@]}"
-    do
-        echo -e "[$NUM]: $RELEASE" 
-        ((NUM++))
-    done
     echo -n "What version of Puppet Enterprise would you like? [$LATEST]: "
     read CHOICE
     CHOICE=${CHOICE:-1}
     INDEX=CHOICE-1
     echo "You chose: [$CHOICE]: ${PE_RELEASES[$INDEX]}"
-    [[ -z ${PE_RELEASES[$CHOICE]} ]] && echo "Release does not exist, try again."
-    break
+    if [[ -z ${PE_RELEASES[$CHOICE]} ]]
+    then 
+        echo "You entered an invalid choice. Please enter a number between 1 and ${#PE_RELEASES[@]}"
+        continue
+    else
+        break
+    fi
 done
 
 # Based on variable or text input curl to release
