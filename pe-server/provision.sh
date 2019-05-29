@@ -8,7 +8,7 @@ osascript -e "tell application \"Tunnelblick\"" -e "connect \"puppet_corporate_v
 # If no release number variable then...
 
 # Get internal release numbers as an array
-PE_RELEASES=($(curl -s http://enterprise.delivery.puppetlabs.net/archives/releases/ | grep -o '[0-9]\{4\}.[0-9].[[0-9]' | sort -r  --unique))
+PE_RELEASES=($(curl -s vag | grep -o '[0-9]\{4\}.[0-9].[[0-9]' | sort -r  --unique))
 
 # Latest version
 LATEST=${PE_RELEASES[0]}
