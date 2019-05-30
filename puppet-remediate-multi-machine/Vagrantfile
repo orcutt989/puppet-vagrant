@@ -12,7 +12,107 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "base"
+  config.vm.define 'centos7-puppet-remediate' do |centos7-puppet-remediate|
+    centos7-puppet-remediate.vm.box = "centos/7"
+    centos7-puppet-remediate.vm.provision "shell", inline: <<-SHELL
+    # Install Puppet - Remediate
+    yum install expect -y
+    ./vagrant/install-puppet-remediate.sh
+    SHELL
+  end
+
+  config.vm.define 'centos7-puppet-agent' do |centos7-puppet-agent|
+    centos7-puppet-agent.vm.box = "centos/7"
+    centos7-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    sudo rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm
+    sudo yum install puppet-agent -y
+    SHELL
+end
+  end
+
+  config.vm.define 'centos6-puppet-agent' do |centos6-puppet-agent|
+    centos6-puppet-agent.vm.box = "centos/6"
+    centos6-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    sudo rpm -Uvh https://yum.puppet.com/puppet6/puppet6-release-el-6.noarch.rpm
+    sudo yum install puppet-agent -y
+    SHELL
+  end
+
+  config.vm.define 'ubuntu1404-puppet-agent' do |ubuntu1404-puppet-agent|
+    ubuntu1404-puppet-agent.vm.box = "ubuntu/trusty64"
+    ubuntu1404-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+    sudo dpkg -i puppetlabs-release-trusty.deb
+    sudo apt-get update
+    sudo apt-get install puppet -y
+    SHELL
+  end
+
+  config.vm.define 'ubuntu1204-puppet-agent' do |ubuntu1204-puppet-agent|
+    ubuntu1204-puppet-agent.vm.box = "ubuntu/precise64"
+    ubuntu1204-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
+    sudo dpkg -i puppetlabs-release-precise.deb
+    sudo apt-get update
+    sudo apt-get install puppet -y
+    SHELL
+  end
+
+  config.vm.define 'ubuntu1604-puppet-agent' do |ubuntu1604-puppet-agent|
+    ubuntu1604-puppet-agent.vm.box = 'ubuntu/xenial64'
+    ubuntu1604-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    wget https://apt.puppetlabs.com/puppet6-release-xenial.deb
+    sudo dpkg -i puppet6-release-xenial.deb
+    sudo apt-get update
+    sudo apt-get install puppet -y
+    SHELL
+  end
+
+  config.vm.define 'opensuse42-puppet-agent' do |opensuse42-puppet-agent|
+    opensuse42-puppet-agent.vm.box = "generic/opensuse42"
+    opensuse42-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    # Download suse puppet
+    SHELL
+  end
+
+  config.vm.define 'windows2012r2-puppet-agent' do |windows2012r2-puppet-agent|
+    windows2012r2-puppet-agent.vm.box = "opentable/win-2012r2-standard-amd64-nocm"
+    windows2012r2-puppet-agent.vm.provision "shell", inline: <<-SHELL
+    $URI="https://downloads.puppetlabs.com/windows/puppet6/puppet-agent-x64-latest.msi"
+    $OUTFILE="C:/puppet-agent-x64-latest.msi"
+    Invoke-webrequest -uri $URI  -OutFile $OUTFILE
+    msiexec /i C:\puppet-agent-x64-latest.msi /qn /norestart
+    SHELL
+  end
+
+  config.vm.define 'centos7-no-puppet' do |centos7-no-puppet|
+    centos7-no-puppet.vm.box = "centos/7"
+  end
+
+  config.vm.define 'centos6-no-puppet' do |centos6-no-puppet|
+    centos6-no-puppet.vm.box = "centos/6"
+  end
+
+  config.vm.define 'ubuntu1404-no-puppet' do |ubuntu1404-no-puppet|
+    ubuntu1404-no-puppet.vm.box = "ubuntu/trusty64"
+  end
+
+  config.vm.define 'ubuntu1204-no-puppet' do |ubuntu1204-no-puppet|
+    ubuntu1204-no-puppet.vm.box = "ubuntu/precise64"
+  end
+
+  config.vm.define 'ubuntu1604-no-puppet' do |ubuntu1604-no-puppet|
+    ubuntu1604-no-puppet.vm.box = "ubuntu/xenial64"
+  end
+
+  config.vm.define 'opensuse42-no-puppet' do |opensuse42-no-puppet|
+    opensuse42-no-puppet.vm.box = "generic/opensuse42"
+  end
+
+  config.vm.define 'windows2012r2-no-puppet' do |windows2012r2-no-puppet|
+    windows2012r2-no-puppet.vm.box = "opentable/win-2012r2-standard-amd64-nocm"
+  end
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

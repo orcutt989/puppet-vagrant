@@ -2,6 +2,9 @@
 */.vagrant
 */puppet-*
 */*.tar.*
+*/License*
+*/puppet-discovery
+*/.puppet-discovery
 
 # General
 .DS_Store
